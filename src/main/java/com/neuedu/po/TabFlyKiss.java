@@ -1,23 +1,19 @@
 package com.neuedu.po;
 
 public class TabFlyKiss {
-    private Integer id;
+	private int id;
+	private int kiss_num;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getKiss_num() {
+		return kiss_num;
+	}
+	public void setKiss_num(int kiss_num) {
+		this.kiss_num = kiss_num;
+	}
 
-    private Integer kissNum;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getKissNum() {
-        return kissNum;
-    }
-
-    public void setKissNum(Integer kissNum) {
-        this.kissNum = kissNum;
-    }
 }

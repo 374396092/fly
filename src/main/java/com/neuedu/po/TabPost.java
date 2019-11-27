@@ -2,84 +2,85 @@ package com.neuedu.po;
 
 import java.util.Date;
 
+import com.neuedu.util.DateUtil;
+
 public class TabPost {
-    private Integer id;
+	private int id;
+	private String title;
+	private String content;
+	private TabUser user;
+	private Date create_time;
+	private int view_count;
+	private TabSpecialColumn special_column;
+	private TabFlyKiss fly_kiss;
+	private int answer_num;
+	private Date cre_time;
+	private int is_good;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public TabUser getUser() {
+		return user;
+	}
+	public void setUser(TabUser user) {
+		this.user = user;
+	}
+	public Date getCreate_time() {
+		return create_time;
+	}
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
+	}
+	public int getView_count() {
+		return view_count;
+	}
+	public void setView_count(int view_count) {
+		this.view_count = view_count;
+	}
+	public TabSpecialColumn getSpecial_column() {
+		return special_column;
+	}
+	public void setSpecial_column(TabSpecialColumn special_column) {
+		this.special_column = special_column;
+	}
+	public TabFlyKiss getFly_kiss() {
+		return fly_kiss;
+	}
+	public void setFly_kiss(TabFlyKiss fly_kiss) {
+		this.fly_kiss = fly_kiss;
+	}
+	public int getAnswer_num() {
+		return answer_num;
+	}
+	public void setAnswer_num(int answer_num) {
+		this.answer_num = answer_num;
+	}
+	public String getCre_time() {
+		return DateUtil.getDateString(cre_time);
+	}
+	public void setCre_time(Date cre_time) {
+		this.cre_time = cre_time;
+	}
+	public int getIs_good() {
+		return is_good;
+	}
+	public void setIs_good(int is_good) {
+		this.is_good = is_good;
+	}
 
-    private String title;
-
-    private Integer userId;
-
-    private Date createTime;
-
-    private Integer viewCount;
-
-    private Integer specialColumnId;
-
-    private Integer flyKissId;
-
-    private String content;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
-    }
-
-    public Integer getSpecialColumnId() {
-        return specialColumnId;
-    }
-
-    public void setSpecialColumnId(Integer specialColumnId) {
-        this.specialColumnId = specialColumnId;
-    }
-
-    public Integer getFlyKissId() {
-        return flyKissId;
-    }
-
-    public void setFlyKissId(Integer flyKissId) {
-        this.flyKissId = flyKissId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
 }

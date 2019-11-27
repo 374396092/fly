@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用
+-->
+<mapper namespace="com.neuedu.dao.PostMapper">
+<select id="getPostCount" parameterType="TabUser" resultType="int">
+select count(*) n from tab_post where user_id = #{value}
+</select>
+<select id="getCollPostCount" parameterType="TabUser" resultType="int">
+select count(*) n from tab_coll_post where user_id = #{value}
+</select>
+<select id="getpost" parameterType="TabUser" resultType="TabPost">
+select m.id id,title,content,n.id id2,nickname,create_time,view_count from tab_post m,tab_user n where m.user_id = n.id and n.id = #{value}
+</select>
+<select id="getcollpost" parameterType="TabUser" resultType="TabPost">
+select m.id id,title from tab_post m,tab_coll_post n where m.id = n.post_id and n.user_id = #{value}
+</select>
+<select id="getSpecialColumn" resultType="TabSpecialColumn">
+select * from tab_special_column
+</select>
+<select id="getFlyKiss" resultType="TabFlyKiss">
+select * from tab_fly_kiss
+</select>
+<insert id="addPost" parameterType="TabPost">
+insert into tab_post (title,content,user_id,create_time,view_count,special_column_id,
+fly_kiss_id) values (#{title},#{content},#{user_id},#{create_time},now(),#{view_count},#{special_column_id},#{fly_kiss_id})
+</insert>
+
+
+<select id="detailpost" parameterType="int" resultMap="getnovelresultmap">
+select a.id aid,a.title,b.special_column,a.content,m.nickname,a.create_time,n.kiss_num,
+e.grade,a.is_good,a.view_count,m.id mid,count(p.id) answer_num from tab_post a 
+join tab_special_column b on a.special_column_id = b.id 
+join tab_user m on a.user_id = m.id 
+join tab_fly_kiss n on a.fly_kiss_id = n.id 
+join tab_user_grade e on m.grade_id = e.id 
+left join tab_answer p on a.id = p.post_id 
+where a.id = #{value} 
+group by a.id,a.title,b.special_column,a.content,m.nickname,a.create_time,
+n.kiss_num,e.grade,a.is_good,m.id,a.view_count 
+</select>
+	<resultMap type="TabPost" id="getnovelresultmap">
+		<result property="id" column="aid"/>
+		<result property="title" column="a.title"/>
+		<result />
+		<collection property="novelList" javaType="list" ofType="TabNovel">
+			<result property="id" column="nid"/>
+			<result property="novel_name" column="novel_name"/>
+			<result property="status" column="status"/>
+			<result property="dis" column="dis"/>
+			<result property="imgpath" column="imgpath"/>
+			<association property="classify" javaType="TabClassify">
+				<result property="id" column="cid"/>
+				<result property="classify_name" column="classify_name"/>
+				<result property="icon" column="icon"/>
+			</association>
+			<association property="author" javaType="TabUser">
+				<result property="username" column="username"/>
+			</association>
+		</collection>
+		
+		
+		
+	</resultMap>
+
+<update id="updatecount" parameterType="int">
+update tab_post set view_count = #{view_count}+1 where id=#{id}
+</update>
+<select id="">
+select a.id,a.nickname,b.grade,m.answer_time,m.answer_content,m.is_accept,
+m.agree_num from tab_user a join tab_user_grade b on a.grade_id = b.id 
+join tab_answer m on a.id = m.answer_user_id where m.post_id = ?
+</select>
+	
+	
+</mapper>
+
+

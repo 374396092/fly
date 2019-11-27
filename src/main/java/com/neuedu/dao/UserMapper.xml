@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 
+注意：使用mapper代理方法开发，namespace有特殊重要的作用
+-->
+<mapper namespace="com.neuedu.dao.UserMapper">
+
+	<select id="findUser" parameterType="TabUser"  resultType="TabUser">
+	select * from tab_user,tab_user_grade where tab_user.grade_id = tab_user_grade.id and email = #{email} and password = #{password}	
+	</select>
+	<select id="findUser2" parameterType="String" resultType="TabUser">
+	select * from tab_user where email = #{value}
+	</select>
+	<insert id="regist" parameterType="TabUser">
+	insert into tab_user (email,password,nickname,grade_id) values (#{email},#{password},#{nickname},#{grade_id})
+	</insert>
+	<select id="getarea" resultType="TabArea">
+	select * from tab_area  
+	</select>
+	<update id="updateinfo" parameterType="TabUser">
+	update tab_user set email = #{email}, nickname = #{nickname}, sex_id = #{sex_id}, area_id = #{area_id},sign = #{sign} where id = #{id}
+	</update>
+	
+	
+</mapper>
+
+
