@@ -2,12 +2,12 @@ package com.neuedu.service;
 
 import java.util.List;
 
-import com.neuedu.model.domain.TabArea;
-import com.neuedu.model.domain.TabUser;
+import com.neuedu.po.TabArea;
+import com.neuedu.po.TabUser;
 
 public interface UserService {
 	TabUser findUser(TabUser user);
-	TabUser findUser(String email);
+	TabUser findUser2(String email);
 	void regist(TabUser user);
 	List<TabArea> getarea();
 	void updateinfo(TabUser user);

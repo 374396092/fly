@@ -46,6 +46,10 @@ n.kiss_num,e.grade,a.is_good,m.id,a.view_count
 	<resultMap type="TabPost" id="getnovelresultmap">
 		<result property="id" column="aid"/>
 		<result property="title" column="a.title"/>
+		<result property="content" column="a.content"/>
+		<result property="create_time" column="a.create_time"/>
+		<result property="is_good" column="a.is_good"/>
+		<result property="view_count" column="a.view_count"/>
 		<result />
 		<collection property="novelList" javaType="list" ofType="TabNovel">
 			<result property="id" column="nid"/>
@@ -70,11 +74,11 @@ n.kiss_num,e.grade,a.is_good,m.id,a.view_count
 <update id="updatecount" parameterType="int">
 update tab_post set view_count = #{view_count}+1 where id=#{id}
 </update>
-<select id="">
+<!-- <select id="">
 select a.id,a.nickname,b.grade,m.answer_time,m.answer_content,m.is_accept,
 m.agree_num from tab_user a join tab_user_grade b on a.grade_id = b.id 
 join tab_answer m on a.id = m.answer_user_id where m.post_id = ?
-</select>
+</select> -->
 	
 	
 </mapper>

@@ -1,70 +1,49 @@
 package com.neuedu.service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import com.neuedu.model.dao.UserDao;
-import com.neuedu.model.dao.UserDaoImpl;
-import com.neuedu.model.domain.TabArea;
-import com.neuedu.model.domain.TabUser;
-import com.neuedu.util.DBUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.neuedu.dao.UserMapper;
+import com.neuedu.po.TabArea;
+import com.neuedu.po.TabUser;
+
+@Service
 public class UserServiceImpl implements UserService{
-	private UserMapper userDao = new UserDaoImpl();
+	@Autowired
+	private UserMapper userMapper;
 
 	@Override
 	public TabUser findUser(TabUser user) {
 		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnection();
-		TabUser user2 = userDao.findUser(conn, user);
-		return user2;
+		return userMapper.findUser(user);
 	}
 
 	@Override
-	public TabUser findUser(String email) {
+	public TabUser findUser2(String email) {
 		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnection();
-		TabUser user2 = userDao.findUser(conn, email);
-		return user2;
+		return userMapper.findUser2(email);
 	}
 
 	@Override
 	public void regist(TabUser user) {
 		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnection();
-		try {
-			conn.setAutoCommit(false);
-			userDao.regist(conn, user);
-			conn.commit();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}finally {
-			DBUtil.close(null, null, conn);
-		}
+		userMapper.regist(user);
 	}
 
 	@Override
 	public List<TabArea> getarea() {
 		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnection();
-		List<TabArea> list = userDao.getarea(conn);
-		return list;
+		return null;
 	}
 
 	@Override
 	public void updateinfo(TabUser user) {
 		// TODO Auto-generated method stub
-		Connection conn = DBUtil.getConnection();
-		userDao.updateinfo(conn, user);
-		
+		userMapper.updateinfo(user);
 	}
+
+
 
 }
